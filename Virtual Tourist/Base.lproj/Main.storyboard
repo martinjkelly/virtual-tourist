@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Locations Map View Controller-->
+        <!--Virtual Tourist-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LocationsMapViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Virtual Tourist" id="BYZ-38-t0r" customClass="LocationsMapViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -30,19 +30,20 @@
                             <constraint firstAttribute="trailingMargin" secondItem="VDO-BM-Pns" secondAttribute="trailing" constant="-20" id="rfm-gm-boi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="tBs-pl-YHu"/>
+                    <navigationItem key="navigationItem" title="Virtual Tourist" id="tBs-pl-YHu"/>
                     <connections>
                         <outlet property="mapView" destination="VDO-BM-Pns" id="M18-ZR-rnI"/>
+                        <segue destination="kEJ-kI-nBB" kind="show" id="YNy-uU-69n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1223" y="1139"/>
+            <point key="canvasLocation" x="1368" y="1139"/>
         </scene>
-        <!--View Controller-->
+        <!--Photo Album View Controller-->
         <scene sceneID="KWi-Fx-WXK">
             <objects>
-                <viewController id="kEJ-kI-nBB" sceneMemberID="viewController">
+                <viewController id="kEJ-kI-nBB" customClass="PhotoAlbumViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ecB-QE-yT2"/>
                         <viewControllerLayoutGuide type="bottom" id="BmK-mh-rc0"/>
@@ -50,12 +51,55 @@
                     <view key="view" contentMode="scaleToFill" id="LKY-41-tjh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gbL-RG-Kh4">
+                                <rect key="frame" x="0.0" y="64" width="600" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="gOB-BN-yHQ"/>
+                                </constraints>
+                            </mapView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KBB-Ir-vOP">
+                                <rect key="frame" x="0.0" y="213" width="600" height="387"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="M3U-Hy-9yW">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="zSn-Dm-CSa">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KBB-Ir-vOP" firstAttribute="leading" secondItem="LKY-41-tjh" secondAttribute="leadingMargin" constant="-20" id="3bG-2P-sce"/>
+                            <constraint firstItem="gbL-RG-Kh4" firstAttribute="top" secondItem="ecB-QE-yT2" secondAttribute="bottom" id="7vn-T5-VqP"/>
+                            <constraint firstItem="gbL-RG-Kh4" firstAttribute="leading" secondItem="LKY-41-tjh" secondAttribute="leadingMargin" constant="-20" id="DGt-jB-GyH"/>
+                            <constraint firstItem="KBB-Ir-vOP" firstAttribute="top" secondItem="ecB-QE-yT2" secondAttribute="bottom" constant="149" id="Duc-Jm-RFa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gbL-RG-Kh4" secondAttribute="trailing" constant="-20" id="F5t-M9-g4Z"/>
+                            <constraint firstItem="BmK-mh-rc0" firstAttribute="top" secondItem="KBB-Ir-vOP" secondAttribute="bottom" id="l1b-jc-xlm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KBB-Ir-vOP" secondAttribute="trailing" constant="-20" id="yir-V1-8Oo"/>
+                        </constraints>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="collectionView" destination="KBB-Ir-vOP" id="RYO-vP-sEG"/>
+                        <outlet property="mapView" destination="gbL-RG-Kh4" id="3QK-l0-QYV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IbF-WX-m4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1888" y="1139"/>
+            <point key="canvasLocation" x="2199" y="1139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7Ye-Nh-Ddg">

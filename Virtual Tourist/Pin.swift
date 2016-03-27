@@ -25,16 +25,13 @@ class Pin: NSManagedObject, MKAnnotation {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
     
-    init(dictionary : [String : AnyObject], context: NSManagedObjectContext) {
+    init(dictionary: [String : AnyObject], context: NSManagedObjectContext) {
         
         let entity = NSEntityDescription.entityForName("Pin", inManagedObjectContext: context)!
         super.init(entity: entity, insertIntoManagedObjectContext: context)
         
-        print(dictionary)
-        print(dictionary[VTClient.Keys.Longitude]!.doubleValue)
-        
-        longitude = dictionary[VTClient.Keys.Longitude]!.doubleValue
-        latitude = dictionary[VTClient.Keys.Latitude]!.doubleValue
+        longitude = dictionary[VTClient.Keys.Longitude] as! Double
+        latitude = dictionary[VTClient.Keys.Latitude] as! Double
         
         do {
             try context.save()

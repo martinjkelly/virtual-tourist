@@ -75,6 +75,32 @@ class LocationsMapViewController: UIViewController, NSFetchedResultsControllerDe
         }
     }
     
+    func dropPin(gestureRecogniser:UILongPressGestureRecognizer) {
+        
+        if gestureRecogniser.state == UIGestureRecognizerState.Began {
+            
+            let touchLocation = gestureRecogniser.locationInView(mapView)
+            let coordinate = mapView.convertPoint(touchLocation, toCoordinateFromView: mapView)
+            let coordDict: [String: AnyObject] = [
+                "longitude": NSNumber(double: coordinate.longitude),
+                "latitude": NSNumber(double: coordinate.latitude)
+            ]
+            
+            let pin = Pin(dictionary: coordDict, context: self.sharedContext)
+            mapView.addAnnotation(pin)
+            
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        // intercept the segue and set the pin on the destination vc
+        if (segue.identifier == "showAlbum") {
+            let destinationVC = segue.destinationViewController as! PhotoAlbumViewController
+            destinationVC.pin = sender as! Pin
+        }
+    }
+    
     // MARK: Store and retrieve current map position
     
     struct MapViewPostiionKeys {
@@ -82,21 +108,6 @@ class LocationsMapViewController: UIViewController, NSFetchedResultsControllerDe
         static let longitude = "longitude"
         static let lonDelta = "lonDelta"
         static let latDelta = "latDelta"
-    }
-    
-    func dropPin(gestureRecogniser:UILongPressGestureRecognizer) {
-        
-        let touchLocation = gestureRecogniser.locationInView(mapView)
-        let coordinate = mapView.convertPoint(touchLocation, toCoordinateFromView: mapView)
-        let coordDict: [String: AnyObject] = [
-            "longitude": NSNumber(double: coordinate.longitude),
-            "latitude": NSNumber(double: coordinate.latitude)
-        ]
-        print(coordDict)
-        if gestureRecogniser.state == UIGestureRecognizerState.Began {
-            let pin = Pin(dictionary: coordDict, context: self.sharedContext)
-            mapView.addAnnotation(pin)
-        }
     }
     
     func getMapPosition() -> MKCoordinateRegion? {
@@ -113,13 +124,12 @@ class LocationsMapViewController: UIViewController, NSFetchedResultsControllerDe
         }
     }
     
-    /**
-     Convenience function to center the map on the given location with preset zoom level
-    */
-    func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-                                                                  regionRadius * 50.0, regionRadius * 50.0)
-        mapView.setRegion(coordinateRegion, animated: true)
+    func setMapPostition() {
+        
+        self.defaults.setDouble(mapView.region.center.latitude, forKey: MapViewPostiionKeys.latitude)
+        self.defaults.setDouble(mapView.region.center.longitude, forKey: MapViewPostiionKeys.longitude)
+        self.defaults.setDouble(mapView.region.span.latitudeDelta, forKey: MapViewPostiionKeys.latDelta)
+        self.defaults.setDouble(mapView.region.span.longitudeDelta, forKey: MapViewPostiionKeys.lonDelta)
     }
 
 }
@@ -127,12 +137,12 @@ class LocationsMapViewController: UIViewController, NSFetchedResultsControllerDe
 extension LocationsMapViewController: MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        
-        self.defaults.setDouble(mapView.region.center.latitude, forKey: MapViewPostiionKeys.latitude)
-        self.defaults.setDouble(mapView.region.center.longitude, forKey: MapViewPostiionKeys.longitude)
-        self.defaults.setDouble(mapView.region.span.latitudeDelta, forKey: MapViewPostiionKeys.latDelta)
-        self.defaults.setDouble(mapView.region.span.longitudeDelta, forKey: MapViewPostiionKeys.lonDelta)
-        
+        self.setMapPostition()
+    }
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+    
+        self.performSegueWithIdentifier("showAlbum", sender: view.annotation as! Pin)
     }
 }
 
