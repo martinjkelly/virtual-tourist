@@ -75,18 +75,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YHl-Nf-PyK">
-                                                    <rect key="frame" x="13" y="13" width="174" height="174"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YHl-Nf-PyK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="YHl-Nf-PyK" firstAttribute="top" secondItem="zSn-Dm-CSa" secondAttribute="topMargin" id="KbG-AU-XtD"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="YHl-Nf-PyK" secondAttribute="bottom" id="cby-n4-tYf"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="YHl-Nf-PyK" secondAttribute="trailing" id="dJA-yh-IKw"/>
-                                            <constraint firstItem="YHl-Nf-PyK" firstAttribute="leading" secondItem="zSn-Dm-CSa" secondAttribute="leadingMargin" id="lTX-WT-7Fw"/>
+                                            <constraint firstItem="YHl-Nf-PyK" firstAttribute="leading" secondItem="zSn-Dm-CSa" secondAttribute="leadingMargin" constant="-8" id="GLl-Xy-Yuw"/>
+                                            <constraint firstItem="YHl-Nf-PyK" firstAttribute="top" secondItem="zSn-Dm-CSa" secondAttribute="topMargin" constant="-8" id="Vow-OC-WJI"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="YHl-Nf-PyK" secondAttribute="bottom" constant="-8" id="dsY-Ix-RoD"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="YHl-Nf-PyK" secondAttribute="trailing" constant="-8" id="qcM-Se-KS4"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="YHl-Nf-PyK" id="GuZ-Kj-EKh"/>

@@ -99,6 +99,8 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
         let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! AlbumCell
         
+        cell.backgroundColor = UIColor.grayColor()
+        
         if let image = photo.image {
             cell.imageView.image = image
         } else {
@@ -111,10 +113,6 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
                 }
             }
         }
-        
-        cell.backgroundColor = UIColor.blackColor()
-        
-        print(cell.frame.size)
         
         return cell
     }
