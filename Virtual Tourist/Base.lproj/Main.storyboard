@@ -33,7 +33,7 @@
                     <navigationItem key="navigationItem" title="Virtual Tourist" id="tBs-pl-YHu"/>
                     <connections>
                         <outlet property="mapView" destination="VDO-BM-Pns" id="M18-ZR-rnI"/>
-                        <segue destination="kEJ-kI-nBB" kind="show" id="YNy-uU-69n"/>
+                        <segue destination="kEJ-kI-nBB" kind="show" identifier="showAlbum" id="YNy-uU-69n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
