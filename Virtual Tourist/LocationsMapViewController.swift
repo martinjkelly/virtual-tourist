@@ -39,16 +39,16 @@ class LocationsMapViewController: UIViewController, NSFetchedResultsControllerDe
         mapView.delegate = self
         fetchedResultsController.delegate = self
         
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(LocationsMapViewController.dropPin))
+        longPressRecognizer.minimumPressDuration = 1.5
+        mapView.addGestureRecognizer(longPressRecognizer)
+        
         if let region = getMapPosition() {
             print("fetched matched map position from nsuserdefaults")
             mapView.region = region
         }
         
         getPins()
-        
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(LocationsMapViewController.dropPin))
-        longPressRecognizer.minimumPressDuration = 1.5
-        mapView.addGestureRecognizer(longPressRecognizer)
     }
     
     func getPins() {
@@ -115,10 +115,12 @@ class LocationsMapViewController: UIViewController, NSFetchedResultsControllerDe
     
     func setMapPostition() {
         
-        self.defaults.setDouble(mapView.region.center.latitude, forKey: MapViewPostiionKeys.latitude)
-        self.defaults.setDouble(mapView.region.center.longitude, forKey: MapViewPostiionKeys.longitude)
-        self.defaults.setDouble(mapView.region.span.latitudeDelta, forKey: MapViewPostiionKeys.latDelta)
-        self.defaults.setDouble(mapView.region.span.longitudeDelta, forKey: MapViewPostiionKeys.lonDelta)
+        defaults.setDouble(mapView.region.center.latitude, forKey: MapViewPostiionKeys.latitude)
+        defaults.setDouble(mapView.region.center.longitude, forKey: MapViewPostiionKeys.longitude)
+        defaults.setDouble(mapView.region.span.latitudeDelta, forKey: MapViewPostiionKeys.latDelta)
+        defaults.setDouble(mapView.region.span.longitudeDelta, forKey: MapViewPostiionKeys.lonDelta)
+        
+        defaults.synchronize()
     }
 
 }

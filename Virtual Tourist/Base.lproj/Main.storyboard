@@ -106,6 +106,12 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="aHP-5b-g3p"/>
                                 </items>
                             </toolbar>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Images Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdG-Hj-Mxx">
+                                <rect key="frame" x="233" y="290" width="135" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -114,6 +120,8 @@
                             <constraint firstItem="KBB-Ir-vOP" firstAttribute="leading" secondItem="LKY-41-tjh" secondAttribute="leadingMargin" constant="-20" id="J9C-Ab-qFY"/>
                             <constraint firstItem="KBB-Ir-vOP" firstAttribute="top" secondItem="ecB-QE-yT2" secondAttribute="bottom" constant="149" id="KZd-rZ-5lq"/>
                             <constraint firstItem="zID-gP-XsS" firstAttribute="bottom" secondItem="LKY-41-tjh" secondAttribute="bottomMargin" id="OFT-PV-bQT"/>
+                            <constraint firstItem="bdG-Hj-Mxx" firstAttribute="centerX" secondItem="LKY-41-tjh" secondAttribute="centerX" id="V8c-8W-d4P"/>
+                            <constraint firstItem="bdG-Hj-Mxx" firstAttribute="centerY" secondItem="LKY-41-tjh" secondAttribute="centerY" id="X0g-AO-IC7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zID-gP-XsS" secondAttribute="trailing" constant="-20" id="XJq-GJ-O0w"/>
                             <constraint firstAttribute="trailingMargin" secondItem="KBB-Ir-vOP" secondAttribute="trailing" constant="-20" id="l9A-D3-jca"/>
                             <constraint firstItem="BmK-mh-rc0" firstAttribute="top" secondItem="KBB-Ir-vOP" secondAttribute="bottom" id="l9g-FP-WVN"/>
@@ -126,6 +134,7 @@
                     <connections>
                         <outlet property="collectionView" destination="KBB-Ir-vOP" id="RYO-vP-sEG"/>
                         <outlet property="mapView" destination="gbL-RG-Kh4" id="3QK-l0-QYV"/>
+                        <outlet property="noImagesLabel" destination="bdG-Hj-Mxx" id="qzm-aY-Fg6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IbF-WX-m4c" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -46,6 +46,7 @@ class PhotoAlbumViewController: UIViewController {
     // MARK: Outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var noImagesLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,23 +91,25 @@ class PhotoAlbumViewController: UIViewController {
     func getPhotos() {
         FlickrClient.sharedInstance().fetchImagesForLocation(pin.latitude, longitude: pin.longitude) { (success:Bool, photos: [[String: AnyObject]]?, errorString:String?) in
             
-            if let photos = photos {
-                let _ = photos.map() { (dictionary: [String : AnyObject]) -> Photo in
-                    let photo = Photo(dictionary: dictionary, context: self.sharedContext)
-                    
-                    photo.pin = self.pin
-                    
-                    return photo
-                }
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                    do {
-                        try self.sharedContext.save()
-                    } catch let error {
-                        print("An error occurred saving photos in core data. Error: \(error)")
-                    }
+            guard let photos = photos where success == true else {
+                self.noImagesLabel.hidden = false
+                return
+            }
+            
+            let _ = photos.map() { (dictionary: [String : AnyObject]) -> Photo in
+                let photo = Photo(dictionary: dictionary, context: self.sharedContext)
+                photo.pin = self.pin
+                return photo
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                do {
+                    try self.sharedContext.save()
+                } catch let error {
+                    print("An error occurred saving photos in core data. Error: \(error)")
                 }
             }
+            
         }
     }
 
@@ -139,6 +142,7 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! AlbumCell
         
         cell.backgroundColor = UIColor.grayColor()
+        cell.imageView.image = UIImage(named: "placeholder")
         
         if let image = photo.image {
             cell.imageView.image = image
@@ -146,9 +150,13 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
             
             VTClient.sharedInstance().getImage(photo.url) { (success:Bool, data:NSData?, errorDescription:String?) in
                 if success {
-                    let image = UIImage(data: data!)
-                    cell.imageView.image = image
-                    FlickrClient.Caches.imageCache.storeImage(image, withIdentifier: photo.id)
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        print("Downloaded image for photo: \(photo.id)")
+                        let image = UIImage(data: data!)
+                        cell.imageView.image = image
+                        FlickrClient.Caches.imageCache.storeImage(image, withIdentifier: photo.id)
+                    }
                 }
             }
         }
@@ -163,7 +171,7 @@ extension PhotoAlbumViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        let size = (collectionView.frame.size.width / 3) - 2
+        let size = collectionView.frame.size.width / 3
         return CGSize(width: size, height: size)
     }
     
@@ -219,8 +227,6 @@ extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
             break
         case .Move:
             print("Move an item. We don't expect to see this in this app.")
-            break
-        default:
             break
         }
         

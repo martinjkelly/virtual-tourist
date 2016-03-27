@@ -21,14 +21,15 @@ class FlickrClient: VTClient {
     
     func fetchImagesForLocation(latitude:Double, longitude:Double, completionHandler:(success:Bool, photos:[[String: AnyObject]]?, errorDescription:String?) -> Void) {
         
-        let methodArguments = [
+        let methodArguments:[String:AnyObject] = [
             "method": VTClient.FlickrAPI.METHOD_NAME,
             "api_key": VTClient.FlickrAPI.API_KEY,
             "bbox": createBoundingBoxString(latitude, longitude: longitude),
             "safe_search": VTClient.Constants.SAFE_SEARCH,
             "extras": VTClient.Constants.EXTRAS,
             "format": VTClient.Constants.DATA_FORMAT,
-            "nojsoncallback": VTClient.Constants.NO_JSON_CALLBACK
+            "nojsoncallback": VTClient.Constants.NO_JSON_CALLBACK,
+            "per_page": 60
         ]
         
         self.fetch(methodArguments) { (result:VTClient.Result) in
