@@ -60,21 +60,37 @@
                             </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KBB-Ir-vOP">
                                 <rect key="frame" x="0.0" y="213" width="600" height="387"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="M3U-Hy-9yW">
-                                    <size key="itemSize" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="M3U-Hy-9yW">
+                                    <size key="itemSize" width="200" height="200"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="zSn-Dm-CSa">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="albumCell" id="zSn-Dm-CSa" customClass="AlbumCell" customModule="Virtual_Tourist">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YHl-Nf-PyK">
+                                                    <rect key="frame" x="13" y="13" width="174" height="174"/>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="YHl-Nf-PyK" firstAttribute="top" secondItem="zSn-Dm-CSa" secondAttribute="topMargin" id="KbG-AU-XtD"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="YHl-Nf-PyK" secondAttribute="bottom" id="cby-n4-tYf"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="YHl-Nf-PyK" secondAttribute="trailing" id="dJA-yh-IKw"/>
+                                            <constraint firstItem="YHl-Nf-PyK" firstAttribute="leading" secondItem="zSn-Dm-CSa" secondAttribute="leadingMargin" id="lTX-WT-7Fw"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="YHl-Nf-PyK" id="GuZ-Kj-EKh"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>

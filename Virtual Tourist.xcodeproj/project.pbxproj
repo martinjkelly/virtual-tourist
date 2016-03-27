@@ -22,6 +22,7 @@
 		F31D80AF1CA73CDB004803AC /* FlickrClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31D80AE1CA73CDB004803AC /* FlickrClient.swift */; };
 		F31D80B11CA73D26004803AC /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31D80B01CA73D26004803AC /* Pin.swift */; };
 		F31D80B31CA73D5D004803AC /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31D80B21CA73D5D004803AC /* Photo.swift */; };
+		F39A91691CA8476D0080FECA /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A91681CA8476D0080FECA /* AlbumCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		F31D80AE1CA73CDB004803AC /* FlickrClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrClient.swift; sourceTree = "<group>"; };
 		F31D80B01CA73D26004803AC /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		F31D80B21CA73D5D004803AC /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		F39A91681CA8476D0080FECA /* AlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 			children = (
 				F31D807C1CA70BD8004803AC /* LocationsMapViewController.swift */,
 				F31D80A51CA7321E004803AC /* PhotoAlbumViewController.swift */,
+				F39A91681CA8476D0080FECA /* AlbumCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				F31D80A11CA70BF9004803AC /* CoreDataStackManager.swift in Sources */,
 				F31D80A61CA7321E004803AC /* PhotoAlbumViewController.swift in Sources */,
 				F31D80AF1CA73CDB004803AC /* FlickrClient.swift in Sources */,
+				F39A91691CA8476D0080FECA /* AlbumCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +460,7 @@
 				F31D80991CA70BD8004803AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F31D809A1CA70BD8004803AC /* Build configuration list for PBXNativeTarget "Virtual TouristTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +469,7 @@
 				F31D809C1CA70BD8004803AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

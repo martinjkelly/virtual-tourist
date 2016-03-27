@@ -14,6 +14,7 @@ class Photo: NSManagedObject {
     @NSManaged var url: String
     @NSManaged var id: String
     @NSManaged var pin: Pin
+    
     var image: UIImage? {
         get {
             return FlickrClient.Caches.imageCache.imageWithIdentifier(self.id)
@@ -31,7 +32,6 @@ class Photo: NSManagedObject {
         
         id = dictionary[VTClient.Keys.PhotoID] as! String
         url = dictionary[VTClient.Keys.PhotoURL] as! String
-        self.pin = dictionary["pin"] as! Pin
     }
     
     override func prepareForDeletion() {

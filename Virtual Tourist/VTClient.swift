@@ -88,6 +88,25 @@ class VTClient : NSObject {
         
     }
     
+    func getImage(urlString:String, completionHandler:(success:Bool, data:NSData?, errorDescription:String?) -> Void) -> Void {
+
+        let url = NSURL(string: urlString)
+        let request = NSMutableURLRequest(URL: url!)
+        
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            guard let data = data where error == nil else {
+                completionHandler(success: false,data: nil, errorDescription: error?.localizedDescription)
+                return
+            }
+            
+            completionHandler(success: true, data: data, errorDescription: nil)
+        }
+        
+        task.resume()
+        
+    }
+    
     class func parseJSONWithCompletionHandler(data: NSData, completionHandler: CompletionHandlerType) {
         
         var parsedResult: AnyObject!

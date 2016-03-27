@@ -20,12 +20,6 @@ class LocationsMapViewController: UIViewController, NSFetchedResultsControllerDe
        return CoreDataStackManager.sharedInstance().managedObjectContext
     }()
     
-    lazy var scratchContext: NSManagedObjectContext = {
-        let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-        context.persistentStoreCoordinator = self.sharedContext.persistentStoreCoordinator
-        return context
-    }()
-    
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName: "Pin")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "latitude", ascending: true)]
@@ -54,12 +48,6 @@ class LocationsMapViewController: UIViewController, NSFetchedResultsControllerDe
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(LocationsMapViewController.dropPin))
         longPressRecognizer.minimumPressDuration = 1.5
         mapView.addGestureRecognizer(longPressRecognizer)
-        
-        /**
-        FlickrClient.sharedInstance().fetchImagesForLocation(51.5034070, longitude: -0.1275920) { (success:Bool, photos: [[String: AnyObject]]?, errorString:String?) in
-            
-            print(photos)
-        }*/
     }
     
     func getPins() {
@@ -142,6 +130,7 @@ extension LocationsMapViewController: MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
     
+        mapView.deselectAnnotation(view.annotation, animated: true)
         self.performSegueWithIdentifier("showAlbum", sender: view.annotation as! Pin)
     }
 }
