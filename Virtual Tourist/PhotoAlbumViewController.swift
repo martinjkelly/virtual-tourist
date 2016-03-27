@@ -94,13 +94,13 @@ class PhotoAlbumViewController: UIViewController {
                 return
             }
             
-            let _ = photos.map() { (dictionary: [String : AnyObject]) -> Photo in
-                let photo = Photo(dictionary: dictionary, context: self.sharedContext)
-                photo.pin = self.pin
-                return photo
-            }
-            
             dispatch_async(dispatch_get_main_queue()) {
+                let _ = photos.map() { (dictionary: [String : AnyObject]) -> Photo in
+                    let photo = Photo(dictionary: dictionary, context: self.sharedContext)
+                    photo.pin = self.pin
+                    return photo
+                }
+            
                 do {
                     try self.sharedContext.save()
                 } catch let error {

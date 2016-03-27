@@ -44,7 +44,6 @@ class LocationsMapViewController: UIViewController, NSFetchedResultsControllerDe
         mapView.addGestureRecognizer(longPressRecognizer)
         
         if let region = getMapPosition() {
-            print("fetched matched map position from nsuserdefaults")
             mapView.region = region
         }
         
@@ -78,6 +77,28 @@ class LocationsMapViewController: UIViewController, NSFetchedResultsControllerDe
             let pin = Pin(dictionary: coordDict, context: self.sharedContext)
             mapView.addAnnotation(pin)
             
+            // Pre-fetch
+            FlickrClient.sharedInstance().fetchImagesForLocation(pin.latitude, longitude: pin.longitude) { (success:Bool, photos: [[String: AnyObject]]?, errorString:String?) in
+                
+                guard let photos = photos where success == true else {
+                    return
+                }
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    let _ = photos.map() { (dictionary: [String : AnyObject]) -> Photo in
+                        let photo = Photo(dictionary: dictionary, context: self.sharedContext)
+                        photo.pin = pin
+                        return photo
+                    }
+                    
+                    do {
+                        try self.sharedContext.save()
+                    } catch let error {
+                        print("An error occurred saving photos in core data. Error: \(error)")
+                    }
+                }
+                
+            }
         }
     }
     

@@ -60,7 +60,7 @@ class FlickrClient: VTClient {
                 }
                 
                 /* Pick a random page! */
-                let pageLimit = min(totalPages, 40)
+                let pageLimit = min(totalPages, 8)
                 let randomPage = Int(arc4random_uniform(UInt32(pageLimit))) + 1
                 self.getImagesFromFlickrBySearchWithPage(methodArguments, pageNumber: randomPage, completionHandler: completionHandler)
                 
