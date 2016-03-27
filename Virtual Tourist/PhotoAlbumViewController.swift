@@ -66,8 +66,6 @@ class PhotoAlbumViewController: UIViewController {
             print("ERROR in PhotoAlbumViewController:viewDidLoad: failed to fetch photos: \(error)")
         }
         
-        print(pin.photos?.count)
-        
         if (pin.photos?.count == 0) {
             self.getPhotos()
         }
@@ -152,7 +150,6 @@ extension PhotoAlbumViewController: UICollectionViewDataSource {
                 if success {
                     
                     dispatch_async(dispatch_get_main_queue()) {
-                        print("Downloaded image for photo: \(photo.id)")
                         let image = UIImage(data: data!)
                         cell.imageView.image = image
                         FlickrClient.Caches.imageCache.storeImage(image, withIdentifier: photo.id)
@@ -201,28 +198,15 @@ extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         
-        switch type{
+        switch type {
             
         case .Insert:
-            print("Insert an item")
-            // Here we are noting that a new Color instance has been added to Core Data. We remember its index path
-            // so that we can add a cell in "controllerDidChangeContent". Note that the "newIndexPath" parameter has
-            // the index path that we want in this case
             insertedIndexPaths.append(newIndexPath!)
             break
         case .Delete:
-            print("Delete an item")
-            // Here we are noting that a Color instance has been deleted from Core Data. We keep remember its index path
-            // so that we can remove the corresponding cell in "controllerDidChangeContent". The "indexPath" parameter has
-            // value that we want in this case.
             deletedIndexPaths.append(indexPath!)
             break
         case .Update:
-            print("Update an item.")
-            // We don't expect Color instances to change after they are created. But Core Data would
-            // notify us of changes if any occured. This can be useful if you want to respond to changes
-            // that come about after data is downloaded. For example, when an images is downloaded from
-            // Flickr in the Virtual Tourist app
             updatedIndexPaths.append(indexPath!)
             break
         case .Move:
