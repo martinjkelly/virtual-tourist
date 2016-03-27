@@ -55,11 +55,12 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gbL-RG-Kh4">
                                 <rect key="frame" x="0.0" y="64" width="600" height="150"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="MGi-LN-2ef"/>
                                     <constraint firstAttribute="height" constant="150" id="gOB-BN-yHQ"/>
                                 </constraints>
                             </mapView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KBB-Ir-vOP">
-                                <rect key="frame" x="0.0" y="213" width="600" height="387"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KBB-Ir-vOP">
+                                <rect key="frame" x="0.0" y="213" width="600" height="343"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="M3U-Hy-9yW">
                                     <size key="itemSize" width="200" height="200"/>
@@ -75,35 +76,49 @@
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YHl-Nf-PyK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YHl-Nf-PyK">
+                                                    <rect key="frame" x="-1" y="0.0" width="200" height="200"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="YHl-Nf-PyK" firstAttribute="leading" secondItem="zSn-Dm-CSa" secondAttribute="leadingMargin" constant="-8" id="GLl-Xy-Yuw"/>
-                                            <constraint firstItem="YHl-Nf-PyK" firstAttribute="top" secondItem="zSn-Dm-CSa" secondAttribute="topMargin" constant="-8" id="Vow-OC-WJI"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="YHl-Nf-PyK" secondAttribute="bottom" constant="-8" id="dsY-Ix-RoD"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="YHl-Nf-PyK" secondAttribute="trailing" constant="-8" id="qcM-Se-KS4"/>
-                                        </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="YHl-Nf-PyK" id="GuZ-Kj-EKh"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zID-gP-XsS">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="7C2-FX-XM1"/>
+                                    <constraint firstAttribute="height" constant="44" id="K6q-Od-wOb"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="upF-Xn-lO1"/>
+                                    <barButtonItem title="New Collection" id="Gmc-EW-gET">
+                                        <color key="tintColor" red="0.31953124999999999" green="0.53868534479999997" blue="0.90191271549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="newCollectionButtonPressed:" destination="kEJ-kI-nBB" id="cwU-JS-LTS"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="aHP-5b-g3p"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KBB-Ir-vOP" firstAttribute="leading" secondItem="LKY-41-tjh" secondAttribute="leadingMargin" constant="-20" id="3bG-2P-sce"/>
-                            <constraint firstItem="gbL-RG-Kh4" firstAttribute="top" secondItem="ecB-QE-yT2" secondAttribute="bottom" id="7vn-T5-VqP"/>
-                            <constraint firstItem="gbL-RG-Kh4" firstAttribute="leading" secondItem="LKY-41-tjh" secondAttribute="leadingMargin" constant="-20" id="DGt-jB-GyH"/>
-                            <constraint firstItem="KBB-Ir-vOP" firstAttribute="top" secondItem="ecB-QE-yT2" secondAttribute="bottom" constant="149" id="Duc-Jm-RFa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="gbL-RG-Kh4" secondAttribute="trailing" constant="-20" id="F5t-M9-g4Z"/>
-                            <constraint firstItem="BmK-mh-rc0" firstAttribute="top" secondItem="KBB-Ir-vOP" secondAttribute="bottom" id="l1b-jc-xlm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="KBB-Ir-vOP" secondAttribute="trailing" constant="-20" id="yir-V1-8Oo"/>
+                            <constraint firstItem="gbL-RG-Kh4" firstAttribute="top" secondItem="ecB-QE-yT2" secondAttribute="bottom" id="1jy-qO-fG8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gbL-RG-Kh4" secondAttribute="trailing" constant="-20" id="8Fr-nG-Ukr"/>
+                            <constraint firstItem="KBB-Ir-vOP" firstAttribute="leading" secondItem="LKY-41-tjh" secondAttribute="leadingMargin" constant="-20" id="J9C-Ab-qFY"/>
+                            <constraint firstItem="KBB-Ir-vOP" firstAttribute="top" secondItem="ecB-QE-yT2" secondAttribute="bottom" constant="149" id="KZd-rZ-5lq"/>
+                            <constraint firstItem="zID-gP-XsS" firstAttribute="bottom" secondItem="LKY-41-tjh" secondAttribute="bottomMargin" id="OFT-PV-bQT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zID-gP-XsS" secondAttribute="trailing" constant="-20" id="XJq-GJ-O0w"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KBB-Ir-vOP" secondAttribute="trailing" constant="-20" id="l9A-D3-jca"/>
+                            <constraint firstItem="BmK-mh-rc0" firstAttribute="top" secondItem="KBB-Ir-vOP" secondAttribute="bottom" id="l9g-FP-WVN"/>
+                            <constraint firstItem="zID-gP-XsS" firstAttribute="leading" secondItem="LKY-41-tjh" secondAttribute="leadingMargin" constant="-20" id="pzP-kv-bhP"/>
+                            <constraint firstItem="gbL-RG-Kh4" firstAttribute="leading" secondItem="LKY-41-tjh" secondAttribute="leadingMargin" constant="-20" id="uPM-iO-CfB"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

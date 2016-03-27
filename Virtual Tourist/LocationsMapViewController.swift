@@ -40,6 +40,7 @@ class LocationsMapViewController: UIViewController, NSFetchedResultsControllerDe
         fetchedResultsController.delegate = self
         
         if let region = getMapPosition() {
+            print("fetched matched map position from nsuserdefaults")
             mapView.region = region
         }
         
